@@ -82,6 +82,10 @@ public class ChessPiece {
         {
             calc = new KnightMoves();
         }
+        else if(thePiece.getPieceType() == PieceType.PAWN)
+        {
+            calc = new PawnMoves();
+        }
         else{
             return null;
         }
