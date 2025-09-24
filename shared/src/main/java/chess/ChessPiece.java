@@ -66,6 +66,14 @@ public class ChessPiece {
         {
             calc = new BishopMoves();
         }
+        else if(thePiece.getPieceType() == PieceType.ROOK)
+        {
+            calc = new RookMoves();
+        }
+        else if(thePiece.getPieceType() == PieceType.QUEEN)
+        {
+            calc = new QueenMoves();
+        }
         else{
             return null;
         }
