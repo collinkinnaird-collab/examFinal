@@ -41,4 +41,33 @@ public interface PieceMovesCalculatore {
         return bonus;
 
     }
+
+    default Collection<ChessMove> oneMove(ChessBoard board, ChessPosition myPosition, int[][] ways){
+
+        Collection<ChessMove> bonus = new ArrayList<>();
+        ChessPiece myPiece = board.getPiece(new ChessPosition(myPosition.getRow(), myPosition.getColumn()));
+
+        for(int[] path: ways){
+
+            int changeXaxis = myPosition.getRow() + path[0];
+            int changeYaxis = myPosition.getColumn() + path[1];
+
+            if(changeYaxis <= 8 && changeYaxis >= 1 && changeXaxis <= 8 && changeXaxis >= 1){
+                ChessPiece otherPiece = board.getPiece(new ChessPosition(changeXaxis, changeYaxis));
+
+                if(otherPiece != null){
+                    if(otherPiece.getTeamColor() != myPiece.getTeamColor()){
+                        bonus.add(new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(changeXaxis, changeYaxis), null));
+                    }
+                }else{
+                    bonus.add(new ChessMove(new ChessPosition(myPosition.getRow(), myPosition.getColumn()), new ChessPosition(changeXaxis, changeYaxis), null));
+
+                }
+            }
+
+        }
+
+        return bonus;
+
+    }
 }
